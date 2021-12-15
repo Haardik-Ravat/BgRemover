@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:apptry/path.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -31,7 +32,9 @@ class GalleryAccessState extends State<GalleryAccess> {
       if (pickedFile != null) {
         _image = File(pickedFile.path);
         Path = pickedFile.path;
-        print(Path);
+        //Navigator.push(
+          //context,
+          //MaterialPageRoute(builder: (context)=>path(Path :Path)));
       } else {
         print('No image selected.');
       }
