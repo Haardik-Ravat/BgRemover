@@ -52,7 +52,7 @@ class _HomeState extends State<Home> {
           Row(
             children: <Widget>[
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 20, 0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 20, 0),
                 child: DropdownButton<String>(
                   dropdownColor: Colors.blueAccent,
                   icon: const Icon(
@@ -106,7 +106,7 @@ class _HomeState extends State<Home> {
         onPressed: () {
           Navigator.pushNamed(context, '/gallery');
         },
-        shape: CircleBorder(
+        shape: const CircleBorder(
         ),
         child: const Image(
             image: AssetImage('assets/homescreen.png')

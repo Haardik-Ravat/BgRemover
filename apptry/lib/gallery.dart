@@ -1,8 +1,8 @@
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-ImagePicker picker = ImagePicker();
 void main() {
   runApp(const MaterialApp(
     home: GalleryAccess(),
@@ -20,19 +20,27 @@ class GalleryAccess extends StatefulWidget {
 }
 
 class GalleryAccessState extends State<GalleryAccess> {
-  File galleryFile = File('text');
+  File? _image ;
+  final picker = ImagePicker();
+  String Path = '/';
 
+  Future getImage() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+        Path = pickedFile.path;
+        print(Path);
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
   @override
   Widget build(BuildContext context) {
     //display image selected from gallery
-    imageSelectorGallery() async {
-      galleryFile = (await picker.pickImage(
-        source: ImageSource.gallery,
-        // maxHeight: 50.0,
-        // maxWidth: 50.0,
-      )) as File;
-      setState(() {});
-    }
+
 
     return Scaffold(
       appBar: AppBar(
@@ -51,15 +59,21 @@ class GalleryAccessState extends State<GalleryAccess> {
               children: <Widget>[
                 ElevatedButton(
                   child: const Text('Select Image from Gallery'),
-                  onPressed: imageSelectorGallery,
+                  onPressed: ()=>getImage(),
                 ),
-                SizedBox(
-                  height: 200.0,
-                  width: 300.0,
-                  child: galleryFile == null
-                      ? const Center(child: Text('Sorry nothing selected!!'))
-                      : Center(child: Image.file(galleryFile!)),
-                )
+                Flexible(
+                    child: _image != null ? Image.file(_image!) : Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(16, 25, 0, 16),
+                      child: Container(
+                          child: Text(' Please select an Image '),
+                          decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(15)
+                          )
+                        ),
+                    ),
+                    )
               ],
             ),
           );
