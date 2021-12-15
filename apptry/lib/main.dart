@@ -1,3 +1,4 @@
+import 'package:apptry/dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:apptry/gallery.dart';
@@ -11,7 +12,7 @@ void main() {
       '/':(context)=>const Home(),
       '/gallery':(context)=>const GalleryAccess(),
       '/Support':(context)=>const Support(),
-      '/Path':(context)=>const path(),
+      '/Path':(context)=>path(),
 
     },
   ));
@@ -27,7 +28,6 @@ Function? func;
 final items = ['Support', 'path'];
 
 class _HomeState extends State<Home> {
-  String dropdownValue =  '';
   @override
   Widget build(BuildContext context) {
 
@@ -40,55 +40,12 @@ class _HomeState extends State<Home> {
             bottom: Radius.elliptical(20, 30),
           )
         ),
-        leading: IconButton(
-          onPressed: (){},
-          icon: const Icon(
-            Icons.settings,
-            color: Colors.black,
-            size: 30.0,
-          )
-        ),
-        actions:[
-          Row(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 20, 0),
-                child: DropdownButton<String>(
-                  dropdownColor: Colors.blueAccent,
-                  icon: const Icon(
-                    Icons.menu,
-                    color: Colors.black,
-                  ),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      dropdownValue = newValue!;
-                      Navigator.pushNamed(context, '/'+dropdownValue);
-                    });
-                  },
-                  items: <String>['','Path', 'Support']
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Center(
-                          child: Text(
-                              value,
-                          style: TextStyle(
-                            color: Colors.blueGrey[800],
-                            fontStyle: FontStyle.italic,
-                          ),),
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                ),
-              ),
-            ],
+        leading:const Icon(Icons.settings,
+        color: Colors.black,) ,
+        actions:const [
+          Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 20, 0),
+            child: CustomButtonTest(),
           )
         ],
         title: const Center(
